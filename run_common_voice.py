@@ -45,6 +45,8 @@ def get_dataset_fn(base_path,
     def _dataset_fn(name):
 
         dataset, dataset_size = common_voice.load_dataset(base_path, name)
+        #print(dataset_size)
+        #print("test")
 
         dataset = preprocessing.preprocess_dataset(dataset, 
             encoder_fn=encoder_fn,

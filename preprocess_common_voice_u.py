@@ -27,7 +27,7 @@ def remove_missing(data_dir, fname):
             new_f.write(next(old_f))
             for line in old_f:                                
                 audio_fn = line.split('\t')[1][:-4] + '.wav'
-                if os.path.exists(os.path.join(clips_dir, audio_fn)):
+                if os.path.exists(os.path.join(clips_dir, audio_fn)):                    
                     new_f.write(line)
 
     os.remove(old_filepath)
@@ -47,32 +47,32 @@ def mp3_converter_job(mp3_filenames):
 
 def main(args):
 
-    print('Converting all Common Voice MP3s to WAV...')
+    #print('Converting all Common Voice MP3s to WAV...')
 
-    clips_dir = os.path.join(args.data_dir, 'clips')
+    #clips_dir = os.path.join(args.data_dir, 'clips')
 
-    all_clips = os.listdir(clips_dir)
-    all_clips = [os.path.join(clips_dir, clip) for clip in all_clips]
+    #all_clips = os.listdir(clips_dir)
+    #all_clips = [os.path.join(clips_dir, clip) for clip in all_clips]
 
-    num_total = len(all_clips)
+    #num_total = len(all_clips)
 
-    num_cpus = multiprocessing.cpu_count()
-    pool = multiprocessing.Pool(num_cpus)
+    #num_cpus = multiprocessing.cpu_count()
+    #pool = multiprocessing.Pool(num_cpus)
 
-    job_size = num_total // num_cpus
+    #job_size = num_total // num_cpus
 
-    jobs = []
-    for _ in range(num_cpus - 1):
-        jobs.append(all_clips[:job_size])
-        all_clips[job_size:]
+    #jobs = []
+    #for _ in range(num_cpus - 1):
+    #    jobs.append(all_clips[:job_size])
+    #    all_clips[job_size:]
 
-    jobs.append(all_clips)
-    all_clips = []
+    #jobs.append(all_clips)
+    #all_clips = []
 
-    pool.map_async(mp3_converter_job, jobs)
+    #pool.map_async(mp3_converter_job, jobs)
 
-    pool.close()
-    pool.join()
+    #pool.close()
+    #pool.join()
 
     print('Removing missing files...')
 

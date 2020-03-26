@@ -60,7 +60,9 @@ def preprocess_dataset(dataset,
                        hparams):
 
     _dataset = dataset.shuffle(5000)
-
+    
+    
+    
     _dataset = _dataset.map(lambda audio, sr, trans: (
         compute_mel_spectrograms(audio, sr,
             n_mel_bins=hparams[HP_MEL_BINS],
